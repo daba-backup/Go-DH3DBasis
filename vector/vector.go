@@ -1,6 +1,7 @@
 package go_dh3dbasis_vector
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -8,6 +9,12 @@ type Vector struct {
 	x float32
 	y float32
 	z float32
+}
+
+func (v *Vector) String() string {
+	str := fmt.Sprintf("(%g,%g,%g)", v.x, v.y, v.z)
+
+	return str
 }
 
 func VGet(x float32, y float32, z float32) Vector {
@@ -125,7 +132,7 @@ func VGetFromAngles(v_rotate float32, h_rotate float32) Vector {
 
 	ret.x = float32(math.Cos(float64(h_rotate)))
 	ret.y = float32(math.Sin(float64(v_rotate)))
-	ret.z = float32(math.Sin(float64(h_rotate)))
+	ret.z = float32(-math.Sin(float64(h_rotate)))
 
 	ret = VNorm(ret)
 

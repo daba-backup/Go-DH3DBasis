@@ -1,10 +1,20 @@
 package go_dh3dbasis_coloru8
 
+import (
+	"fmt"
+)
+
 type ColorU8 struct {
 	r float32
 	g float32
 	b float32
 	a float32
+}
+
+func (c *ColorU8) String() string {
+	str := fmt.Sprintf("(%g,%g,%g,%g)", c.r, c.g, c.b, c.a)
+
+	return str
 }
 
 func GetColorU8FromFloat32Components(r float32, g float32, b float32, a float32) ColorU8 {
