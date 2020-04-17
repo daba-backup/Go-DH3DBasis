@@ -304,3 +304,46 @@ func MInverse(m Matrix) Matrix {
 
 	return ret
 }
+
+func innerVTransform(ex_v []float32, m Matrix) go_dh3dbasis_vector.Vector {
+	var ret go_dh3dbasis_vector.Vector
+
+	m00 := m.M[0][0]
+	m01 := m.M[0][1]
+	m02 := m.M[0][2]
+	m03 := m.M[0][3]
+	m10 := m.M[1][0]
+	m11 := m.M[1][1]
+	m12 := m.M[1][2]
+	m13 := m.M[1][3]
+	m20 := m.M[2][0]
+	m21 := m.M[2][1]
+	m22 := m.M[2][2]
+	m23 := m.M[2][3]
+
+	ret.X = m00*ex_v[0] + m01*ex_v[1] + m02*ex_v[2] + m03*ex_v[3]
+	ret.Y = m10*ex_v[0] + m11*ex_v[1] + m12*ex_v[2] + m13*ex_v[3]
+	ret.Z = m20*ex_v[0] + m21*ex_v[1] + m22*ex_v[2] + m23*ex_v[3]
+
+	return ret
+}
+func VTransform(v go_dh3dbasis_vector.Vector, m Matrix) go_dh3dbasis_vector.Vector {
+	var ex_v [4]float32
+	ex_v[0] = v.X
+	ex_v[1] = v.Y
+	ex_v[2] = v.Z
+	ex_v[3] = 1.0
+
+	ret := innerVTransform(ex_v[:], m)
+	return ret
+}
+func VTransformSR(v go_dh3dbasis_vector.Vector, m Matrix) go_dh3dbasis_vector.Vector {
+	var ex_v [4]float32
+	ex_v[0] = v.X
+	ex_v[1] = v.Y
+	ex_v[2] = v.Z
+	ex_v[3] = 0.0
+
+	ret := innerVTransform(ex_v[:], m)
+	return ret
+}
