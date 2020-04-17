@@ -1,4 +1,4 @@
-package go_dh3dbasis_coloru8
+package dh_coloru8
 
 import (
 	"fmt"

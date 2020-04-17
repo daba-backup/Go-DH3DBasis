@@ -1,4 +1,4 @@
-package go_dh3dbasis_vector
+package dh_vector
 
 import (
 	"fmt"
