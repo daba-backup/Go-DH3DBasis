@@ -5,14 +5,14 @@ import (
 )
 
 type ColorU8 struct {
-	r float32
-	g float32
-	b float32
-	a float32
+	R float32
+	G float32
+	B float32
+	A float32
 }
 
 func (c *ColorU8) String() string {
-	str := fmt.Sprintf("(%g,%g,%g,%g)", c.r, c.g, c.b, c.a)
+	str := fmt.Sprintf("(%g,%g,%g,%g)", c.R, c.G, c.B, c.A)
 
 	return str
 }
@@ -20,20 +20,20 @@ func (c *ColorU8) String() string {
 func GetColorU8FromFloat32Components(r float32, g float32, b float32, a float32) ColorU8 {
 	var color ColorU8
 
-	color.r = r
-	color.g = g
-	color.b = b
-	color.a = a
+	color.R = r
+	color.G = g
+	color.B = b
+	color.A = a
 
 	return color
 }
 func GetColorU8FromIntComponents(r int, g int, b int, a int) ColorU8 {
 	var color ColorU8
 
-	color.r = float32(r) / 255.0
-	color.g = float32(g) / 255.0
-	color.b = float32(b) / 255.0
-	color.a = float32(a) / 255.0
+	color.R = float32(r) / 255.0
+	color.G = float32(g) / 255.0
+	color.B = float32(b) / 255.0
+	color.A = float32(a) / 255.0
 
 	return color
 }

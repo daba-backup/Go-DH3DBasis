@@ -6,13 +6,13 @@ import (
 )
 
 type Vector struct {
-	x float32
-	y float32
-	z float32
+	X float32
+	Y float32
+	Z float32
 }
 
 func (v *Vector) String() string {
-	str := fmt.Sprintf("(%g,%g,%g)", v.x, v.y, v.z)
+	str := fmt.Sprintf("(%g,%g,%g)", v.X, v.Y, v.Z)
 
 	return str
 }
@@ -20,73 +20,73 @@ func (v *Vector) String() string {
 func VGet(x float32, y float32, z float32) Vector {
 	var v Vector
 
-	v.x = x
-	v.y = y
-	v.z = z
+	v.X = x
+	v.Y = y
+	v.Z = z
 
 	return v
 }
 func VAdd(lhs Vector, rhs Vector) Vector {
 	var ret Vector
 
-	ret.x = lhs.x + rhs.x
-	ret.y = lhs.y + rhs.y
-	ret.z = lhs.z + rhs.z
+	ret.X = lhs.X + rhs.X
+	ret.Y = lhs.Y + rhs.Y
+	ret.Z = lhs.Z + rhs.Z
 
 	return ret
 }
 func VSub(lhs Vector, rhs Vector) Vector {
 	var ret Vector
 
-	ret.x = lhs.x - rhs.x
-	ret.y = lhs.y - rhs.y
-	ret.z = lhs.z - rhs.z
+	ret.X = lhs.X - rhs.X
+	ret.Y = lhs.Y - rhs.Y
+	ret.Z = lhs.Z - rhs.Z
 
 	return ret
 }
 func VSize(v Vector) float32 {
-	size := math.Sqrt(float64(v.x*v.x + v.y*v.y + v.z*v.z))
+	size := math.Sqrt(float64(v.X*v.X + v.Y*v.Y + v.Z*v.Z))
 	return float32(size)
 }
 func VSquareSize(v Vector) float32 {
-	return v.x*v.x + v.y*v.y + v.z*v.z
+	return v.X*v.X + v.Y*v.Y + v.Z*v.Z
 }
 func VNorm(v Vector) Vector {
 	size := VSize(v)
 
 	var ret Vector
-	ret.x = v.x / size
-	ret.y = v.y / size
-	ret.z = v.z / size
+	ret.X = v.X / size
+	ret.Y = v.Y / size
+	ret.Z = v.Z / size
 
 	return ret
 }
 func VScale(v Vector, scale float32) Vector {
 	var ret Vector
 
-	ret.x = v.x * scale
-	ret.y = v.y * scale
-	ret.z = v.z * scale
+	ret.X = v.X * scale
+	ret.Y = v.Y * scale
+	ret.Z = v.Z * scale
 
 	return ret
 }
 func VDot(lhs Vector, rhs Vector) float32 {
-	return lhs.x*rhs.x + lhs.y*rhs.y + lhs.z*rhs.z
+	return lhs.X*rhs.X + lhs.Y*rhs.Y + lhs.Z*rhs.Z
 }
 func VCross(lhs Vector, rhs Vector) Vector {
 	var ret Vector
 
-	ret.x = lhs.y*rhs.z - lhs.z*rhs.y
-	ret.y = lhs.z*rhs.x - lhs.x*rhs.z
-	ret.z = lhs.x*rhs.y - lhs.y*rhs.x
+	ret.X = lhs.Y*rhs.Z - lhs.Z*rhs.Y
+	ret.Y = lhs.Z*rhs.X - lhs.X*rhs.Z
+	ret.Z = lhs.X*rhs.Y - lhs.Y*rhs.X
 
 	return ret
 }
 func VAverage(v []Vector) Vector {
 	var ret Vector
-	ret.x = 0.0
-	ret.y = 0.0
-	ret.z = 0.0
+	ret.X = 0.0
+	ret.Y = 0.0
+	ret.Z = 0.0
 
 	v_num := len(v)
 	for i := 0; i < v_num; i++ {
@@ -104,13 +104,13 @@ func VAngleV(v Vector) float32 {
 
 	var th float32
 
-	sin_th := v.y / d
+	sin_th := v.Y / d
 	th = float32(math.Asin(float64(sin_th)))
 
 	return th
 }
 func VAngleH(v Vector) float32 {
-	xz_vec := VGet(v.x, 0.0, v.z)
+	xz_vec := VGet(v.X, 0.0, v.Z)
 	xz_length := VSize(xz_vec)
 	if xz_length < 1.0E-8 {
 		return 0.0
@@ -118,10 +118,10 @@ func VAngleH(v Vector) float32 {
 
 	var th float32
 
-	cos_th := v.x / xz_length
+	cos_th := v.X / xz_length
 	th = float32(math.Acos(float64(cos_th)))
 
-	if v.z >= 0.0 {
+	if v.Z >= 0.0 {
 		th *= (-1.0)
 	}
 
@@ -130,9 +130,9 @@ func VAngleH(v Vector) float32 {
 func VGetFromAngles(v_rotate float32, h_rotate float32) Vector {
 	var ret Vector
 
-	ret.x = float32(math.Cos(float64(h_rotate)))
-	ret.y = float32(math.Sin(float64(v_rotate)))
-	ret.z = float32(-math.Sin(float64(h_rotate)))
+	ret.X = float32(math.Cos(float64(h_rotate)))
+	ret.Y = float32(math.Sin(float64(v_rotate)))
+	ret.Z = float32(-math.Sin(float64(h_rotate)))
 
 	ret = VNorm(ret)
 
