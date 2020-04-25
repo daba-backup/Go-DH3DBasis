@@ -1,4 +1,4 @@
-package dhcoloru8
+package coloru8
 
 import (
 	"fmt"

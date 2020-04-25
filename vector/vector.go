@@ -1,4 +1,4 @@
-package dhvector
+package vector
 
 import (
 	"fmt"

@@ -1,10 +1,10 @@
-package dhmatrix
+package matrix
 
 import (
 	"fmt"
 	"math"
 
-	"github.com/dabasan/go-dh3dbasis/dhvector"
+	"github.com/dabasan/go-dh3dbasis/vector"
 )
 
 type Matrix struct {
@@ -56,7 +56,7 @@ func MGetIdent() Matrix {
 
 	return ret
 }
-func MGetScale(scale dhvector.Vector) Matrix {
+func MGetScale(scale vector.Vector) Matrix {
 	var ret Matrix
 
 	ret.M[0][0] = scale.X
@@ -78,7 +78,7 @@ func MGetScale(scale dhvector.Vector) Matrix {
 
 	return ret
 }
-func MGetTranslate(translate dhvector.Vector) Matrix {
+func MGetTranslate(translate vector.Vector) Matrix {
 	var ret Matrix
 
 	ret.M[0][0] = 1.0
@@ -166,7 +166,7 @@ func MGetRotZ(th float32) Matrix {
 
 	return ret
 }
-func MGetRotAxis(axis dhvector.Vector, th float32) Matrix {
+func MGetRotAxis(axis vector.Vector, th float32) Matrix {
 	var ret Matrix
 
 	cos_th := float32(math.Cos(float64(th)))
@@ -305,8 +305,8 @@ func MInverse(m Matrix) Matrix {
 	return ret
 }
 
-func innerVTransform(ex_v []float32, m Matrix) dhvector.Vector {
-	var ret dhvector.Vector
+func innerVTransform(ex_v []float32, m Matrix) vector.Vector {
+	var ret vector.Vector
 
 	m00 := m.M[0][0]
 	m01 := m.M[0][1]
@@ -327,7 +327,7 @@ func innerVTransform(ex_v []float32, m Matrix) dhvector.Vector {
 
 	return ret
 }
-func VTransform(v dhvector.Vector, m Matrix) dhvector.Vector {
+func VTransform(v vector.Vector, m Matrix) vector.Vector {
 	var ex_v [4]float32
 	ex_v[0] = v.X
 	ex_v[1] = v.Y
@@ -337,7 +337,7 @@ func VTransform(v dhvector.Vector, m Matrix) dhvector.Vector {
 	ret := innerVTransform(ex_v[:], m)
 	return ret
 }
-func VTransformSR(v dhvector.Vector, m Matrix) dhvector.Vector {
+func VTransformSR(v vector.Vector, m Matrix) vector.Vector {
 	var ex_v [4]float32
 	ex_v[0] = v.X
 	ex_v[1] = v.Y
