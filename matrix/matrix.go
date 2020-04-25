@@ -56,6 +56,17 @@ func MGetIdent() Matrix {
 
 	return ret
 }
+func MGetZero() Matrix {
+	var ret Matrix
+
+	for i := 0; i < 4; i++ {
+		for j := 0; j < 4; j++ {
+			ret.M[i][j] = 0.0
+		}
+	}
+
+	return ret
+}
 func MGetScale(scale vector.Vector) Matrix {
 	var ret Matrix
 
